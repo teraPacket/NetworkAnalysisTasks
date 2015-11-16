@@ -1,6 +1,6 @@
 # NetworkAnalysisTasks: Introduction/Overview
 
-   This project maintains a list of network analysis tasks that we have collected that represent challenging scenarios for network professionals, especially when trying to solve with the current set of network traffic and packet analysis tools, like Wireshark. 
+   This project maintains a list of network analysis tasks we have collected over time that represent challenging scenarios for network professionals, especially when trying to solve with the current set of network traffic and packet analysis tools, like Wireshark. 
 
    We encourage you to try and solve these and let us know how you did it.
 
