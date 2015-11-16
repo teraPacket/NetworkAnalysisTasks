@@ -7,7 +7,7 @@ Note:
 * Detect a change on IP header TTL values among packets in a TCP session, the change is >= 10. This is possible Man-On-The-Side attack.
 * Exclude packets in a pcap to/from a list of countries.
 * Detect host scanning by ARP or IP (ICMP).
-* Detect port knock attempts: instance where 3 TCP SYN packets for the server ports 1000 2000 3000 of theh same server IP within 1 second.
+* Detect port knock attempts: instance where 3 TCP SYN packets for the server ports 1000 2000 3000 of the same server IP within 1 second.
 * Detect ARP requests that are not answered.
 * Detect ARP requests that are answered more than once within 100ms.
 * Detect the evidence of possible ARP poisoning: list the hosts with MAC address change.
@@ -16,21 +16,22 @@ Note:
 * Capture all packets for all sessions whose server port is 6667 (IRC).  (donot count the sessions whose client port is 6667). 
 * Capture packets to/from server ports 6660 - 6669.
 * Capture all packets for all sessions whose server IP is 1.2.3.4. 
-* Capture packets from/to a list (thousands) of IP addresses?
-* Find all the TCP sessions that didn’t finish: no FIN or RST
-* Find all the TCP sessions that finish with TCP RST
+* Capture packets from/to a list (thousands) of IP addresses.
+* Find all the TCP sessions that didn’t finish: no FIN or RST.
+* Find all the TCP sessions that finish with TCP RST.
 * Extract TCP sessions whose first data are from the server side.
 * Detect sessions with retransmitted SYNACK after TCP client sent data.
 * Find TCP sessions that are established but with TCP SYN retries.
 * Get all packets of all complete TCP sessions:  TCP sessions with tcp handshake, data packet(s) and FIN packet(s).
-* Find all ICMP ping requests that didn’t get responded
+* Find all ICMP ping requests that didn’t get responded.
 * Find all the UDP packets that got ICMP packet: port-unreachable.
 * Find TCP sessions where the client sent more data in total than the server.
 * Detect packet drop on a stream of UDP packets whose payload has an increment counter.
-* Detect Man-On-The-Side attack on a HTTP transaction by checking the latency between request and response time (if it’s less than ½ of TCP handshake time)
+* Detect Man-On-The-Side attack on a HTTP transaction by checking the latency between request and response time (if it’s less than ½ of TCP handshake time).
 * Detect Man-On-The-Side attack on a HTTP transaction by checking sequence number and checksum: the response from the real server and the injected response will have the same sequence number but not the same checksum.
 * Detect all the ping sweep: show the hosts who are doing ICMP ping requests on greater than 10 hosts.
-* Detect port scanning by either TCP or UDP
+* Detect TCP port scanning.
+* Detect UDP port scanning.
 * Detect a type of RAT where the pattern is a repetition of the following:  server sent a msg and client replies immediately (within 1 second).
 * Detect Skype Login, where the client exchanges UDP messages with a server and then, it sent about 10 UDP messages to different servers all at once (within 0.1 second).
 * Detect Slowloris attack: HTTP session, but each piece of data from client is < 10 bytes
