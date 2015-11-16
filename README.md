@@ -6,7 +6,7 @@
 
    Also, if you have scenarios and stumpers that you would like to submit for inclusion, please raise an new issue in Github or submit them to us directly at info@capstarforensics.com.
 
-    It is our goal to create a growing list of challenging scenarios so that we can focus our energies on solving them in the most efficient way possible.
+   It is our goal to create a growing list of challenging scenarios so that we can focus our energies on solving them in the most efficient way possible.
 
    We look forward to hearing from you.
 
