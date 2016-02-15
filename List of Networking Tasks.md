@@ -10,6 +10,7 @@ Note:
 * Detect port knock attempts: instance where 3 TCP SYN packets for the server ports 1000 2000 3000 of the same server IP within 1 second.
 * Detect ARP requests that are not answered.
 * Detect ARP requests that are answered more than once within 100ms.
+* Detect ARP requests that has unsolicited ARP response.
 * Detect the evidence of possible ARP poisoning: list the hosts with MAC address change.
 
 ##TCP/UDP/ICMP
@@ -19,6 +20,7 @@ Note:
 * Capture packets from/to a list (thousands) of IP addresses.
 * Find all the TCP sessions that didn’t finish: no FIN or RST.
 * Find all the TCP sessions that finish with TCP RST.
+* Find all the TCP sessions that has complete tear down sequence, FINACK, FINACK, ACK.  <a href="https://ask.wireshark.org/questions/40953/filter-for-all-connections">Ask Wireshark question</a>
 * Extract TCP sessions whose first data are from the server side.
 * Detect sessions with retransmitted SYNACK after TCP client sent data.
 * Find TCP sessions that are established but with TCP SYN retries.
@@ -32,6 +34,7 @@ Note:
 * Detect all the ping sweep: show the hosts who are doing ICMP ping requests on greater than 10 hosts.
 * Detect TCP port scanning.
 * Detect UDP port scanning.
+* Remove tcp packets on sessions which started before capturing is started, in another word, remove packets belonging to sessions not having either SYN or SYNACK packet.
 * Detect a type of RAT where the pattern is a repetition of the following:  server sent a msg and client replies immediately (within 1 second).
 * Detect Skype Login, where the client exchanges UDP messages with a server and then, it sent about 10 UDP messages to different servers all at once (within 0.1 second).
 * Detect Slowloris attack: HTTP session, but each piece of data from client is < 10 bytes
@@ -98,6 +101,17 @@ Note:
 * Show all the HTTP requests to a list of 10 countries.
 * List all unique HTTP URLs in a pcap
 * Detect instances where HTTP redirect is not followed, could be a sign of some malware. 
+* Detect HTTP responses that display system error messages like a stack trace on Java.
+* Detect all HTTP requests whose User-Agent length is less than 10.
+* Detect HTTP requests whose URI has "?" but HTTP request doesn't have a referer header.
+* Detect HTTP POST requests but HTTP request doesn't have a referer header.
+* Detect multiple HTTP requests on the same TCP connection, the second request doesn't have a Referer header.
+* Detect the HTTP GET requests that come in greater than 2 pieces and each piece is less than 1000 bytes
+* Detect the HTTP POST requests whose total size is less than 3000 bytes but it took 10 seconds in sending all pieces
+* Detect the presence of pipeline HTTP requests
+* Detect TCP session with HTTP transaction, where handshake is extremely fast (<= 2ms) but HTTP response is very slow (>=2 seconds)
+* Detect HTTP transaction where HTTP response body is just an IP address.
+* Detect HTTP transaction where HTTP response claims to be text/html according to content-type, but it doesn't have any tags (<...>)
 
 ##SSL
 * TCP sessions to server port 443, but not SSL handshake, list all the first data packet.
@@ -117,6 +131,7 @@ Note:
 * SMTP: Detect aborted SMTP sessions: never sent any mail data.
 * SMTP: Extract all the mail data. 
 * SMTP: Given a recipient email address, find the sender email address and subject in the SMTP session.
+* SMTP: Detect the case when more than 5 SMTP sessions from a host in a minute
 * FTP:  Follow FTP session (control and data session)
 * FTP:  Extract data downloaded or uploaded.
 * TFTP:  Extract data downloaded or uploaded.
