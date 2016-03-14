@@ -141,7 +141,8 @@ Note:
 ##C&C
 * Client and server has long sessions (duration > 5min) with 10 pairs of interactive messages. 
 * Detect long TCP sessions (say, duration is greater than 5 minutes) where server side sent a sequence of small messages (possibly a list of command for bot), say, the server messages are all smaller than 100 bytes.
-
+* The second HTTP request in a TCP session has "x-flash-version" header.
+* a TCP session with at least two HTTP transaction, the first one has resp code 404,  the second request has the same URI as the first one.
 
 ##Extraction
 * Save all TCP or UDP packets from a pcap into a new pcap with only the headers MAC, IP, TCP/UDP/ICMP
@@ -149,6 +150,7 @@ Note:
 * Save packets in GTP tunnel into a new pcap so that the tunnel layer is removed.
 * Save packets encapsulated using TZSP so that the tunnel layer is removed.
 * Display telnet session by remove duplicate bytes. (which makes it hard to see what’s the command user typed)
+* A client tried some site and getting a non-200 response, then it tried some other sites with the same URI or hostname in URI.
 
 #Charting
 * Chart the HTTP response latencies.

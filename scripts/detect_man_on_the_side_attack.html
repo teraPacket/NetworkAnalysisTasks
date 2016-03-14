@@ -1,0 +1,22 @@
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">//this script will detect the presence of Man-On-The-Side attack </span>
+<span style="color: #888888">//by checking against TCP data packet from server  with the same sequence</span>
+<span style="color: #888888">// number but different checksum</span>
+uint seq;
+uint cksum;
+<span style="color: #333399; font-weight: bold">int</span> isFirstSrvData <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+<span style="color: #997700; font-weight: bold">pkt:</span>
+    <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span> tcp) <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (side <span style="color: #333333">==</span> CLIENT) <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (len <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span>) <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">if</span> (session.isFirstSrvData <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>) {
+		session.isFirstSrvData <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+        session.seq <span style="color: #333333">=</span> tcp.seq;
+        session.cksum <span style="color: #333333">=</span> tcp.checksum;
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    } <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (session.seq <span style="color: #333333">==</span> tcp.seq) {
+        <span style="color: #008800; font-weight: bold">if</span> (session.cksum <span style="color: #333333">!=</span> tcp.checksum) {
+            notify(<span style="background-color: #fff0f0">"detected Man-in-the-side attack at pkt %d</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\n</span><span style="background-color: #fff0f0">"</span>, pktNum);
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">1</span>;
+        }
+    }
+</pre></div>
