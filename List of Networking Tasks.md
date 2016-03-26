@@ -56,6 +56,11 @@ Note:
 * Given a packet number, save the TCP data from the server in a session to a file starting from the given packet.
 * Deduplicate packets in TCP/UDP sessions without specifying how far back we need to compare against.
 * Save a pcap with  IP fragments into a new pcap where all IP fragments are reassebled.
+* Find TCP sessions where the first data is from client and it's 6 seconds after tcp handshake
+* Find TCP sessions where the server sent FINACK immediately after TCP handshake.
+* Find TCP sessions where the server just sent TCP SYNACK, no other packets but clint sent data and retransmit.
+* Find TCP sessions where the server sent TCP RST on the first client data.
+
 
 ##DNS
 * Extract the DNS requests that have slow DNS responses (latencies > 1 second).
@@ -112,6 +117,8 @@ Note:
 * Detect TCP session with HTTP transaction, where handshake is extremely fast (<= 2ms) but HTTP response is very slow (>=2 seconds)
 * Detect HTTP transaction where HTTP response body is just an IP address.
 * Detect HTTP transaction where HTTP response claims to be text/html according to content-type, but it doesn't have any tags (<...>)
+* Detect HTTP transactions where the first 4 bytes in HTTP body are binary (no printable character)
+
 
 ##SSL
 * TCP sessions to server port 443, but not SSL handshake, list all the first data packet.
@@ -137,6 +144,8 @@ Note:
 * TFTP:  Extract data downloaded or uploaded.
 * Detect AIM by checking if certain fields of packets are incrementing counter.
 * Detected failed manual SSH login based on the pattern that, client and server initially exchange a bunch messages quickly(within half a second), then clienet sends a message and gets a reply, but client does not send any message for 3 seconds.
+* Find the TCP sessions where server port is 21 (for FTP) but the first data packet in the session is from client.
+* 
 
 ##C&C
 * Client and server has long sessions (duration > 5min) with 10 pairs of interactive messages. 
@@ -151,6 +160,9 @@ Note:
 * Save packets encapsulated using TZSP so that the tunnel layer is removed.
 * Display telnet session by remove duplicate bytes. (which makes it hard to see what’s the command user typed)
 * A client tried some site and getting a non-200 response, then it tried some other sites with the same URI or hostname in URI.
+* HTTP POST request claims (via "Content-Type") Post data is www-form-urlencoded, but it's actually not.
+* HTTP response whose Content-Type is "text/html", but the data doesn't have a tag.
+* HTTP transaction where client sent FIN or RST after server sent HTTP header but before entire HTTP response was sent.
 
 #Charting
 * Chart the HTTP response latencies.
